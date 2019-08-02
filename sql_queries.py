@@ -50,8 +50,8 @@ CREATE TABLE artists (
     artist_id VARCHAR(18),
     name VARCHAR NOT NULL,
     location VARCHAR NOT NULL,
-    latitude VARCHAR NOT NULL,
-    longitude VARCHAR NOT NULL,
+    latitude FLOAT,
+    longitude FLOAT,
     PRIMARY KEY (artist_id)
 )
 """)
