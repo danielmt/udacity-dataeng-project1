@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
+from psycopg2.extensions import connection, cursor
+
 from db import get_connection
 from sql_queries import create_table_queries, drop_table_queries
 
 
-def create_database():
+def create_database() -> None:
     # connect to default database
     conn, cur = get_connection(db="template1")
 
@@ -17,13 +19,13 @@ def create_database():
     conn.close()
 
 
-def drop_tables(cur, conn):
+def drop_tables(cur: cursor, conn: connection) -> None:
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
-def create_tables(cur, conn):
+def create_tables(cur: cursor, conn: connection) -> None:
     conn, cur = get_connection()
     for query in create_table_queries:
         cur.execute(query)

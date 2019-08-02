@@ -1,4 +1,7 @@
+from typing import Tuple
+
 import psycopg2
+from psycopg2.extensions import connection, cursor
 
 # defaults
 DB_HOST = "127.0.0.1"
@@ -7,7 +10,7 @@ DB_USER = "student"
 DB_PASSWORD = "student"
 
 
-def get_connection(db=None):
+def get_connection(db: str=None) -> Tuple[connection, cursor]:
     """connect to database and return a connection and cursor tuple"""
     if not db:
         db = DB_NAME
