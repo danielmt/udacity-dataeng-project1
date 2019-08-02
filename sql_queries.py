@@ -10,54 +10,55 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 songplay_table_create = ("""
 CREATE TABLE songplays (
-    songplay_id int,
-    start_time int,
-    user_id int,
-    level varchar,
-    song_id varchar(18),
-    artist_id varchar(18),
-    session_id int,
-    location varchar,
-    user_agent varchar
+    songplay_id SERIAL,
+    start_time INT NOT NULL,
+    user_id INT NOT NULL,
+    level VARCHAR NOT NULL,
+    song_id VARCHAR(18),
+    artist_id VARCHAR(18),
+    session_id INT NOT NULL,
+    location VARCHAR NOT NULL,
+    user_agent VARCHAR NOT NULL,
+    PRIMARY KEY (songplay_id)
 )
 """)
 
 user_table_create = ("""
 CREATE TABLE users (
-    user_id int,
-    first_name varchar,
-    last_name varchar,
-    gender char(1),
-    level varchar,
+    user_id INT,
+    first_name VARCHAR NOT NULL,
+    last_name VARCHAR NOT NULL,
+    gender CHAR(1) NOT NULL,
+    level VARCHAR NOT NULL,
     PRIMARY KEY (user_id)
 )
 """)
 
 song_table_create = ("""
 CREATE TABLE songs (
-    song_id varchar(18),
-    title varchar,
-    artist_id varchar(18),
-    year int,
-    duration float,
+    song_id VARCHAR(18),
+    title VARCHAR NOT NULL,
+    artist_id VARCHAR(18) NOT NULL,
+    year INT NOT NULL,
+    duration FLOAT NOT NULL,
     PRIMARY KEY (song_id)
 )
 """)
 
 artist_table_create = ("""
 CREATE TABLE artists (
-    artist_id varchar(18),
-    name varchar NOT NULL,
-    location varchar,
-    latitude varchar,
-    longitude varchar,
+    artist_id VARCHAR(18),
+    name VARCHAR NOT NULL,
+    location VARCHAR NOT NULL,
+    latitude VARCHAR NOT NULL,
+    longitude VARCHAR NOT NULL,
     PRIMARY KEY (artist_id)
 )
 """)
 
 time_table_create = ("""
 CREATE TABLE time (
-    start_time int NOT NULL,
+    start_time TIMESTAMP NOT NULL,
     hour int NOT NULL,
     day int NOT NULL,
     week int NOT NULL,
@@ -71,9 +72,9 @@ CREATE TABLE time (
 
 songplay_table_insert = ("""
 INSERT INTO songplays
-    (songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
+    (start_time, user_id, level, song_id, artist_id, session_id, location, user_agent)
 VALUES
-    (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    (%s, %s, %s, %s, %s, %s, %s, %s)
 """)
 
 user_table_insert = ("""
@@ -81,6 +82,7 @@ INSERT INTO users
     (user_id, first_name, last_name, gender, level)
 VALUES
     (%s, %s, %s, %s, %s)
+ON CONFLICT (user_id) DO NOTHING;
 """)
 
 song_table_insert = ("""
@@ -95,6 +97,7 @@ INSERT INTO artists
     (artist_id, name, location, latitude, longitude)
 VALUES
     (%s, %s, %s, %s, %s)
+ON CONFLICT (artist_id) DO NOTHING;
 """)
 
 
