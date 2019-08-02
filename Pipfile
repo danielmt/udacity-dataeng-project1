@@ -8,6 +8,9 @@ verify_ssl = true
 [packages]
 psycopg2 = "*"
 pandas = "*"
+jupyter = "*"
+ipython-sql = "*"
+jupyter-sql = "*"
 
 [requires]
 python_version = "3.6"
